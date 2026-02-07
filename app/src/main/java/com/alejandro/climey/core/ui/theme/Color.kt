@@ -1,4 +1,4 @@
-package com.alejandro.climey.ui.theme
+package com.alejandro.climey.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

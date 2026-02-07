@@ -1,6 +1,8 @@
 package com.alejandro.climey
 
 import android.app.Application
+import com.alejandro.climey.di.dataModule
+import com.alejandro.climey.di.domainModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
 import org.koin.core.context.GlobalContext.startKoin
@@ -12,7 +14,7 @@ class ClimeyApp : Application() {
         startKoin {
             androidLogger()
             androidContext(this@ClimeyApp)
-            modules()
+            modules(dataModule + domainModule)
         }
     }
 }

@@ -20,6 +20,18 @@ android {
     }
 
     buildTypes {
+        debug {
+            buildConfigField("String", "base_api_url", "\"https://api.weatherapi.com/v1/\"")
+            buildConfigField("String", "api_key", "\"de5553176da64306b86153651221606\"")
+        }
+
+        release {
+            buildConfigField("String", "base_api_url", "\"https://api.weatherapi.com/v1/\"")
+            buildConfigField("String", "api_key", "\"de5553176da64306b86153651221606\"")
+        }
+    }
+
+    buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(
@@ -34,6 +46,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -46,8 +59,14 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
     implementation(libs.androidx.compose.navigation)
+
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.gson)
+
     implementation(platform(libs.koin.bom))
+    implementation(libs.koin.core)
     implementation(libs.koin.android)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
