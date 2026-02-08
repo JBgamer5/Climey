@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -57,18 +58,19 @@ dependencies {
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.bundles.compose.core)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
+    implementation(libs.androidx.compose.adaptive)
     implementation(libs.androidx.compose.navigation)
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.material.theme.xml)
+    implementation(libs.androidx.compose.ui.text.google.fonts)
+
+    implementation(libs.lottie.compose)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
 
     implementation(platform(libs.koin.bom))
-    implementation(libs.koin.core)
-    implementation(libs.koin.android)
-    implementation(libs.androidx.compose.ui.text.google.fonts)
+    implementation(libs.bundles.koin)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

@@ -5,14 +5,6 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-sealed class ApiError : Throwable() {
-    class NetworkError : ApiError()
-    class SerializationError : ApiError()
-    class InternalServerError(errorCode: Int) : ApiError()
-
-    class UnknownError : ApiError()
-}
-
 fun getRetrofitClient(baseUrl: String, apiKey: String, language: String): Retrofit {
     val okHttpClient = OkHttpClient.Builder()
         .addInterceptor(BaseConfigInterceptor(apiKey, language))

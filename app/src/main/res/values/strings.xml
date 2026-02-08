@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">Climey</string>
+
+    <!-- search screen -->
+    <string name="search_place_holder">Ingresa la ubicación aquí</string>
+    <string name="search_error_no_network">No tienes conexion a Internet</string>
+    <string name="search_error_serialization">Ocurrió un error en la App</string>
+    <string name="search_error_server">El servidor está fallando codigo: %1$s</string>
+    <string name="search_error_unknown">Ha ocurrido un error desconocido</string>
+    <!-- end search screen -->
 </resources>
