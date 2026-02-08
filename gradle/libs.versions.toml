@@ -12,6 +12,7 @@ composeBom = "2026.01.01"
 navigationCompose = "2.9.7"
 retrofit = "3.0.0"
 koin-bom = "4.1.1"
+uiTextGoogleFonts = "1.10.2"
 materialThemeXml = "1.13.0"
 
 [libraries]
@@ -37,6 +38,7 @@ koin-core = { module = "io.insert-koin:koin-core" }
 koin-android = { module = "io.insert-koin:koin-android" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
 retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
+androidx-compose-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 
 [bundles]
