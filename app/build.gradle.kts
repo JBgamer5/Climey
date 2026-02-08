@@ -59,6 +59,8 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.compose.material3.adaptive.navigation.suite)
     implementation(libs.androidx.compose.navigation)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.material.theme.xml)
 
     implementation(libs.retrofit)
     implementation(libs.retrofit.gson)
