@@ -23,10 +23,6 @@ data class CurrentWeatherInfoDto(
     val condition: ConditionDto,
     @SerializedName("wind_kph")
     val windKph: Double,
-    @SerializedName("pressure_mb")
-    val pressureMb: Double,
-    @SerializedName("precip_mm")
-    val precipMm: Double,
     val humidity: Double,
     val cloud: Int,
     @SerializedName("feelslike_c")
@@ -60,8 +56,6 @@ data class DayInfoDto(
     val minTempC: Double,
     @SerializedName("avgtemp_c")
     val avgTempC: Double,
-    @SerializedName("avghumidity")
-    val avgHumidity: Double,
     val condition: ConditionDto
 )
 
@@ -69,14 +63,13 @@ data class HourInfoDto(
     val time: String,
     val condition: ConditionDto,
     @SerializedName("temp_c")
-    val tempC: Double,
-    val humidity: Double
+    val tempC: Double
 )
 
 fun ConditionDto.toCondition(): Condition {
     return Condition(
         text = text,
-        iconUrl = iconUrl
+        iconUrl = iconUrl.replace("//", "https://")
     )
 }
 
@@ -84,8 +77,7 @@ fun HourInfoDto.toHourInfo(): HourInfo {
     return HourInfo(
         time = time.toLocalDateTime(),
         condition = condition.toCondition(),
-        tempC = tempC,
-        humidity = humidity
+        tempC = tempC
     )
 }
 
@@ -94,7 +86,6 @@ fun DayInfoDto.toDayInfo(): DayInfo {
         maxTempC = maxTempC,
         minTempC = minTempC,
         avgTempC = avgTempC,
-        avgHumidity = avgHumidity,
         condition = condition.toCondition()
     )
 }
@@ -118,8 +109,6 @@ fun CurrentWeatherInfoDto.toCurrentWeatherInfo(): CurrentWeatherInfo {
         tempC = tempC,
         condition = condition.toCondition(),
         windKph = windKph,
-        pressureMb = pressureMb,
-        precipMm = precipMm,
         humidity = humidity,
         cloud = cloud,
         feelsLikeC = feelsLikeC,

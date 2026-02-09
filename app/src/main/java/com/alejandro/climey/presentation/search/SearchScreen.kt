@@ -34,6 +34,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -58,6 +59,7 @@ fun SearchScreen(
     val state by viewModel.state.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
     val searchState = rememberSearchBarState()
+    val keyboardController = LocalSoftwareKeyboardController.current
 
     val screenSize = getDeviceSize()
     var expandedResult by remember { mutableStateOf(false) }
@@ -81,6 +83,7 @@ fun SearchScreen(
                     searchState = searchState,
                     expandedResult = expandedResult,
                     onExpandedChange = { expandedResult = it && searchQuery.isNotBlank() },
+                    keyboardController = keyboardController,
                     enableScroll = true
                 )
                 AnimatedVisibility(expandedResult || searchQuery.isNotBlank()) {
@@ -91,6 +94,7 @@ fun SearchScreen(
                             enableScroll = true,
                             onClick = { id ->
                                 id?.let {
+                                    keyboardController?.hide()
                                     navController.navigate(Screens.WeatherInformation(it))
                                 }
                             }
@@ -118,7 +122,8 @@ fun SearchScreen(
                         searchQuery = searchQuery,
                         searchState = searchState,
                         expandedResult = expandedResult,
-                        onExpandedChange = { expandedResult = it }
+                        onExpandedChange = { expandedResult = it },
+                        keyboardController = keyboardController
                     )
                 }
 
@@ -135,6 +140,7 @@ fun SearchScreen(
                             state = state,
                             onClick = { id ->
                                 id?.let {
+                                    keyboardController?.hide()
                                     navController.navigate(Screens.WeatherInformation(it))
                                 }
                             }
@@ -150,13 +156,13 @@ fun SearchScreen(
 @Composable
 private fun SearchContent(
     viewModel: SearchViewModel,
+    keyboardController: SoftwareKeyboardController?,
     searchQuery: String,
     searchState: SearchBarState,
     expandedResult: Boolean,
     onExpandedChange: (Boolean) -> Unit,
     enableScroll: Boolean = false
 ) {
-    val keyboardController = LocalSoftwareKeyboardController.current
     val composition by rememberLottieComposition(
         LottieCompositionSpec.RawRes(R.raw.searching_animation)
     )

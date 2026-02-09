@@ -1,5 +1,6 @@
 [versions]
 agp = "9.0.0"
+coilCompose = "3.3.0"
 coreKtx = "1.17.0"
 coreSplashscreen = "1.2.0"
 junit = "4.13.2"
@@ -10,6 +11,7 @@ activityCompose = "1.12.3"
 kotlin = "2.3.10"
 composeBom = "2026.01.01"
 lottieCompose = "6.7.1"
+materialIconsExtended = "1.7.8"
 navigationCompose = "2.9.7"
 retrofit = "3.0.0"
 koin-bom = "4.1.1"
@@ -44,6 +46,9 @@ retrofit-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref 
 androidx-compose-ui-text-google-fonts = { group = "androidx.compose.ui", name = "ui-text-google-fonts", version.ref = "uiTextGoogleFonts" }
 androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", version.ref = "coreSplashscreen" }
 lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilCompose" }
+androidx-compose-material-icons-extended = { module = "androidx.compose.material:material-icons-extended", version.ref = "materialIconsExtended" }
 
 [bundles]
 compose-core = [

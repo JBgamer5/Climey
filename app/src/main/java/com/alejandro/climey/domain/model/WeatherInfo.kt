@@ -14,8 +14,6 @@ data class CurrentWeatherInfo(
     val tempC: Double,
     val condition: Condition,
     val windKph: Double,
-    val pressureMb: Double,
-    val precipMm: Double,
     val humidity: Double,
     val cloud: Int,
     val feelsLikeC: Double,
@@ -42,13 +40,11 @@ data class DayInfo(
     val maxTempC: Double,
     val minTempC: Double,
     val avgTempC: Double,
-    val avgHumidity: Double,
     val condition: Condition
 )
 
 data class HourInfo(
     val time: LocalDateTime,
     val condition: Condition,
-    val tempC: Double,
-    val humidity: Double
+    val tempC: Double
 )

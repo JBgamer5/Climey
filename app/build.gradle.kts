@@ -63,6 +63,7 @@ dependencies {
     implementation(libs.androidx.core.splashscreen)
     implementation(libs.material.theme.xml)
     implementation(libs.androidx.compose.ui.text.google.fonts)
+    implementation(libs.androidx.compose.material.icons.extended)
 
     implementation(libs.lottie.compose)
 
@@ -71,6 +72,9 @@ dependencies {
 
     implementation(platform(libs.koin.bom))
     implementation(libs.bundles.koin)
+
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

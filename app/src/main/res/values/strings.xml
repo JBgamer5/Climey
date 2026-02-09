@@ -1,11 +1,62 @@
 <resources>
     <string name="app_name">Climey</string>
 
+    <!-- measures -->
+    <string name="km_h">km/h</string>
+    <string name="km">km</string>
+    <!-- end measures -->
+
     <!-- search screen -->
     <string name="search_place_holder">Ingresa la ubicación aquí</string>
-    <string name="search_error_no_network">No tienes conexion a Internet</string>
+    <string name="search_error_no_network">No tienes conexión a internet</string>
     <string name="search_error_serialization">Ocurrió un error en la App</string>
-    <string name="search_error_server">El servidor está fallando codigo: %1$s</string>
+    <string name="search_error_server">El servidor está fallando, codigo: %1$s</string>
     <string name="search_error_unknown">Ha ocurrido un error desconocido</string>
     <!-- end search screen -->
+
+    <!-- weather info screen -->
+    <string name="weather_info_error_no_network">No tienes conexión a internet</string>
+    <string name="weather_info_error_serialization">Ocurrió un error en la App</string>
+    <string name="weather_info_error_server">El servidor está fallando, código: %1$s</string>
+    <string name="weather_info_error_unknown">Ha ocurrido un error desconocido</string>
+    <string name="weather_info_error_button_retry">Reintentar</string>
+    <string name="weather_info_forecast_hour">Pronóstico por hora</string>
+    <string name="weather_info_forecast_next_days">Pronóstico futuro</string>
+    <string name="weather_info_forecast_today">Hoy</string>
+    <!-- end weather info screen -->
+
+    <!-- Current Weather Component -->
+    <string name="current_weather_component_temp_min">Min.</string>
+    <string name="current_weather_component_temp_max">Max.</string>
+    <!-- end Current Weather Component -->
+
+    <!-- Thermal Sensation Component -->
+    <string name="thermal_sensation_title">Sensación\ntérmica</string>
+    <!-- end Thermal Sensation Component -->
+
+    <!-- Wind Component -->
+    <string name="wind_title">Viento</string>
+    <!-- end Wind Component -->
+
+    <!-- Wind Component -->
+    <string name="cloud_title">Nubosidad</string>
+    <!-- end Wind Component -->
+
+    <!-- Uv Component -->
+    <string name="uv_title">Índice UV</string>
+    <string name="uv_low">Bajo</string>
+    <string name="uv_medium">Medio</string>
+    <string name="uv_high">Alto</string>
+    <string name="uv_very_high">Muy Alto</string>
+    <string name="uv_extreme">Extremo</string>
+    <!-- end Uv Component -->
+
+    <!-- Humidity Component-->
+    <string name="humidity_title">Humedad</string>
+    <!-- end Humidity Component -->
+
+    <!-- Visibility Component-->
+    <string name="visibility_title">Visibilidad</string>
+    <!-- end Visibility Component -->
+
 </resources>

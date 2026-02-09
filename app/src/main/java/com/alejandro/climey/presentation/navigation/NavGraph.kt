@@ -28,7 +28,7 @@ fun MainNavGraph(innerPadding: PaddingValues) {
         composable<Screens.WeatherInformation> {
             val id = it.toRoute<Screens.WeatherInformation>().locationId
 
-            WeatherInfoScreen(id)
+            WeatherInfoScreen(id,navController)
         }
     }
 }
