@@ -63,7 +63,7 @@ fun WindComponent(
 
                 Text(
                     text = value.plus(stringResource(R.string.km_h)),
-                    style = MaterialTheme.typography.displaySmall
+                    style = MaterialTheme.typography.headlineSmall
                 )
 
                 Text(

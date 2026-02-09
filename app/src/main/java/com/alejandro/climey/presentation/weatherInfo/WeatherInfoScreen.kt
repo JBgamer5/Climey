@@ -183,7 +183,7 @@ private fun ExtraWeatherInfoContent(
     onClickSearch: () -> Unit = {}
 ) {
     val hourDayInfo = data.forecast.forecastDay.first().hours
-    val aspectRatio = 3f / 3.5f
+    val aspectRatio = 3f / 4f
     val currentLocale = Locale.getDefault()
 
     FlowRow(
@@ -192,6 +192,7 @@ private fun ExtraWeatherInfoContent(
         verticalArrangement = Arrangement.spacedBy(15.dp),
         modifier = Modifier
             .fillMaxWidth()
+            .padding(bottom = 20.dp)
     ) {
         if (showSearch) {
             Box(
@@ -202,12 +203,13 @@ private fun ExtraWeatherInfoContent(
                     onClick = onClickSearch,
                     modifier = Modifier
                         .padding(top = 20.dp, end = 20.dp)
-                        .size(40.dp)
                         .align(Alignment.CenterEnd)
                 ) {
                     Icon(
                         imageVector = Icons.Filled.Search,
-                        contentDescription = "search button"
+                        contentDescription = "search button",
+                        modifier = Modifier
+                            .size(70.dp)
                     )
                 }
             }
@@ -324,12 +326,13 @@ private fun CurrentWeatherContent(
                 onClick = onClickSearch,
                 modifier = Modifier
                     .padding(top = 20.dp, end = 20.dp)
-                    .size(40.dp)
                     .align(Alignment.End)
             ) {
                 Icon(
                     imageVector = Icons.Filled.Search,
-                    contentDescription = "search button"
+                    contentDescription = "search button",
+                    modifier = Modifier
+                        .size(70.dp)
                 )
             }
         }

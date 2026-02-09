@@ -12,6 +12,7 @@
     <string name="search_error_serialization">Ocurrió un error en la App</string>
     <string name="search_error_server">El servidor está fallando, codigo: %1$s</string>
     <string name="search_error_unknown">Ha ocurrido un error desconocido</string>
+    <string name="search_not_found_city">Lo siento, no encontramos la ciudad</string>
     <!-- end search screen -->
 
     <!-- weather info screen -->
@@ -21,7 +22,7 @@
     <string name="weather_info_error_unknown">Ha ocurrido un error desconocido</string>
     <string name="weather_info_error_button_retry">Reintentar</string>
     <string name="weather_info_forecast_hour">Pronóstico por hora</string>
-    <string name="weather_info_forecast_next_days">Pronóstico futuro</string>
+    <string name="weather_info_forecast_next_days">¿Qué esperar los próximos días?</string>
     <string name="weather_info_forecast_today">Hoy</string>
     <!-- end weather info screen -->
 
@@ -31,7 +32,7 @@
     <!-- end Current Weather Component -->
 
     <!-- Thermal Sensation Component -->
-    <string name="thermal_sensation_title">Sensación\ntérmica</string>
+    <string name="thermal_sensation_title">Sensación</string>
     <!-- end Thermal Sensation Component -->
 
     <!-- Wind Component -->

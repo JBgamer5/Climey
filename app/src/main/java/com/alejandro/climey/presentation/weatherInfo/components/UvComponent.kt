@@ -114,7 +114,7 @@ fun UvComponent(
                 }
                 Text(
                     text = description,
-                    style = MaterialTheme.typography.headlineMedium,
+                    style = MaterialTheme.typography.headlineSmall,
                     textAlign = TextAlign.Center
                 )
                 Text(

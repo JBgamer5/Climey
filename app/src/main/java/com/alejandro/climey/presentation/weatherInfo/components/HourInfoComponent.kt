@@ -67,7 +67,7 @@ fun HourInfoComponent(
                     maxLines = 3,
                     overflow = TextOverflow.Ellipsis,
                     modifier = Modifier
-                        .width(80.dp)
+                        .width(85.dp)
                 )
             }
         }

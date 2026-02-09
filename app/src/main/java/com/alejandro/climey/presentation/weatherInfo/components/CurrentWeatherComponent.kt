@@ -4,8 +4,10 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -85,20 +87,21 @@ fun CurrentWeatherComponent(
                         .padding(horizontal = 10.dp)
                 )
 
+                Spacer(modifier = Modifier.weight(1f))
+
                 Row(
                     horizontalArrangement = Arrangement.SpaceBetween,
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(horizontal = 30.dp)
-                        .padding(top = 40.dp)
                 ) {
                     Text(
                         text = stringResource(R.string.current_weather_component_temp_min),
-                        style = MaterialTheme.typography.headlineSmall
+                        style = MaterialTheme.typography.bodyLarge
                     )
                     Text(
                         text = stringResource(R.string.current_weather_component_temp_max),
-                        style = MaterialTheme.typography.headlineSmall
+                        style = MaterialTheme.typography.bodyLarge
                     )
                 }
 
@@ -140,6 +143,7 @@ private fun Preview() {
                 condition = "Sunny",
                 modifier = Modifier
                     .fillMaxWidth()
+                    .height(300.dp)
                     .align(Alignment.Center)
             )
         }

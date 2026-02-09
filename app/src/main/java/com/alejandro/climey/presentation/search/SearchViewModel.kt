@@ -59,5 +59,5 @@ class SearchViewModel(
 data class SearchState(
     val isLoading: Boolean = false,
     val error: Throwable? = null,
-    val results: List<Location> = emptyList()
+    val results: List<Location>? = null
 )

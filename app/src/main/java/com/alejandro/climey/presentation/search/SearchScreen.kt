@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
@@ -125,6 +126,7 @@ private fun Content(
                     )
             )
             SearchContent(
+                state = state,
                 searchQuery = searchQuery,
                 searchState = searchState,
                 expandedResult = expandedResult,
@@ -145,6 +147,7 @@ private fun Content(
             ) {
                 ResultContent(
                     state = state,
+                    searchQuery = searchQuery,
                     onClick = { id ->
                         id?.let {
                             keyboardController?.hide()
@@ -176,6 +179,7 @@ private fun ContentCompactLandscape(
             .fillMaxSize()
     ) {
         SearchContent(
+            state = state,
             searchQuery = searchQuery,
             searchState = searchState,
             expandedResult = expandedResult,
@@ -190,6 +194,7 @@ private fun ContentCompactLandscape(
                 ResultContent(
                     state = state,
                     enableScroll = true,
+                    searchQuery = searchQuery,
                     onClick = { id ->
                         id?.let {
                             keyboardController?.hide()
@@ -205,6 +210,7 @@ private fun ContentCompactLandscape(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SearchContent(
+    state: SearchState,
     keyboardController: SoftwareKeyboardController?,
     searchQuery: String,
     searchState: SearchBarState,
@@ -247,7 +253,15 @@ private fun SearchContent(
                         Text(text = stringResource(R.string.search_place_holder))
                     },
                     modifier = Modifier
-                        .testTag("search_bar_input")
+                        .testTag("search_bar_input"),
+                    trailingIcon = if (state.isLoading) {
+                        {
+                            CircularProgressIndicator(
+                                modifier = Modifier
+                                    .size(25.dp)
+                            )
+                        }
+                    } else null
                 )
             },
             modifier = Modifier
@@ -259,6 +273,7 @@ private fun SearchContent(
 @Composable
 private fun ResultContent(
     state: SearchState,
+    searchQuery: String,
     enableScroll: Boolean = false,
     onClick: (id: Int?) -> Unit
 ) {
@@ -284,6 +299,16 @@ private fun ResultContent(
                     maxWidth = 720.dp,
                 )
         )
+    } else if (state.results?.isEmpty() == true && searchQuery.isNotBlank()) {
+        Text(
+            text = stringResource(R.string.search_not_found_city),
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .sizeIn(
+                    minWidth = 360.dp,
+                    maxWidth = 720.dp,
+                )
+        )
     } else {
         Surface(
             shape = MaterialTheme.shapes.medium,
@@ -298,7 +323,7 @@ private fun ResultContent(
                 else Modifier
 
             ) {
-                state.results.forEach {
+                state.results?.forEach {
                     Text(
                         text = "${it.name}, ${it.country}",
                         modifier = Modifier
