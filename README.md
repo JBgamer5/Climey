@@ -1,4 +1,5 @@
 # 🌦️ Climey
+[ ![Download APK](https://img.shields.io/badge/Download-APK-green?style=for-the-badge&logo=android) ](https://github.com/JBgamer5/Climey/releases)
 
 **Climey** is a native Android weather application engineered to deliver a minimalist, fluid, and highly adaptive user experience. Built with modern Android development standards, it leverages **Material Design 3** to provide a consistent and aesthetically pleasing interface across a wide range of devices, from standard smartphones to foldables and tablets.
 
