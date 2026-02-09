@@ -2,6 +2,13 @@
 
 **Climey** is a native Android weather application engineered to deliver a minimalist, fluid, and highly adaptive user experience. Built with modern Android development standards, it leverages **Material Design 3** to provide a consistent and aesthetically pleasing interface across a wide range of devices, from standard smartphones to foldables and tablets.
 
+## 📱 Interface Preview
+
+| Dark Mode | Light Mode | Tablet / Foldable Support |
+| :---: | :---: | :---: |
+|<img width="1080" height="2400" alt="Screenshot_20260209_114712" src="https://github.com/user-attachments/assets/1b83ecea-a837-4fd3-b2ee-46be5970a2b9" /> | <img width="1080" height="2400" alt="Screenshot_20260209_114810" src="https://github.com/user-attachments/assets/e7111b2f-0e69-45f8-b9c6-88cf6fd3e220" /> | <img width="2208" height="1840" alt="Screenshot_20260209_120117" src="https://github.com/user-attachments/assets/5c0eefe0-7b97-46d2-8833-c6f664592910" />|
+
+
 ## 🚀 Project Overview & Features
 
 Climey is not just about displaying weather data; it is an exploration of modern UI/UX patterns and robust software architecture.
