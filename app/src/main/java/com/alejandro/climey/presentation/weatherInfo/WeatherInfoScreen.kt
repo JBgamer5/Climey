@@ -34,6 +34,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -65,10 +66,10 @@ import kotlin.math.roundToInt
 @Composable
 fun WeatherInfoScreen(
     id: Int,
-    navController: NavController
+    navController: NavController,
+    viewModel: WeatherInfoViewModel = koinViewModel<WeatherInfoViewModel>()
 ) {
     val infoHasLoadedOnce = rememberSaveable { mutableStateOf(false) }
-    val viewModel = koinViewModel<WeatherInfoViewModel>()
     val state by viewModel.state.collectAsState()
     val screenSize = getDeviceSize()
 
@@ -181,7 +182,7 @@ private fun ExtraWeatherInfoContent(
     showSearch: Boolean = false,
     onClickSearch: () -> Unit = {}
 ) {
-    val hourDayInfo = data.forecast.forecastDay.first().hour
+    val hourDayInfo = data.forecast.forecastDay.first().hours
     val aspectRatio = 3f / 3.5f
     val currentLocale = Locale.getDefault()
 
@@ -315,7 +316,7 @@ private fun CurrentWeatherContent(
     onClickSearch: () -> Unit = {}
 ) {
     val dayInfo = data.forecast.forecastDay.first().day
-    val hourDayInfo = data.forecast.forecastDay.first().hour
+    val hourDayInfo = data.forecast.forecastDay.first().hours
 
     Column(modifier = modifier) {
         if (showSearch) {
@@ -340,6 +341,8 @@ private fun CurrentWeatherContent(
             tempMax = dayInfo.maxTempC.roundToInt().toString(),
             condition = data.current.condition.text,
             maxLinesCondition = if (isCompactLandscape) 1 else 2,
+            modifier = Modifier
+                .testTag("current_weather_component")
         )
         if (!isCompactLandscape) {
             Spacer(modifier = Modifier.height(20.dp))

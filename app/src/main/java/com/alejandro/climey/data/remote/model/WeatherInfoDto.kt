@@ -94,7 +94,7 @@ fun ForecastDayDto.toForecastDay(): ForecastDay {
     return ForecastDay(
         date = date.toLocalDate(),
         day = day.toDayInfo(),
-        hour = hour.map { it.toHourInfo() }
+        hours = hour.map { it.toHourInfo() }
     )
 }
 

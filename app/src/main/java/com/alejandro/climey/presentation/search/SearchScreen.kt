@@ -30,11 +30,11 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -53,16 +53,16 @@ import org.koin.compose.viewmodel.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SearchScreen(
-    navController: NavController
+    navController: NavController,
+    viewModel: SearchViewModel = koinViewModel()
 ) {
-    val viewModel = koinViewModel<SearchViewModel>()
     val state by viewModel.state.collectAsState()
     val searchQuery by viewModel.searchQuery.collectAsState()
     val searchState = rememberSearchBarState()
     val keyboardController = LocalSoftwareKeyboardController.current
 
     val screenSize = getDeviceSize()
-    var expandedResult by remember { mutableStateOf(false) }
+    val expandedResult = remember { mutableStateOf(false) }
 
     AnimatedContent(
         screenSize,
@@ -71,82 +71,132 @@ fun SearchScreen(
             .imePadding()
     ) { size ->
         if (size == ScreenSize.CompactLandscape) {
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-                SearchContent(
-                    viewModel = viewModel,
-                    searchQuery = searchQuery,
-                    searchState = searchState,
-                    expandedResult = expandedResult,
-                    onExpandedChange = { expandedResult = it && searchQuery.isNotBlank() },
-                    keyboardController = keyboardController,
-                    enableScroll = true
-                )
-                AnimatedVisibility(expandedResult || searchQuery.isNotBlank()) {
-                    Row {
-                        Spacer(modifier = Modifier.width(20.dp))
-                        ResultContent(
-                            state = state,
-                            enableScroll = true,
-                            onClick = { id ->
-                                id?.let {
-                                    keyboardController?.hide()
-                                    navController.navigate(Screens.WeatherInformation(it))
-                                }
-                            }
-                        )
-                    }
-                }
-            }
+            ContentCompactLandscape(
+                state = state,
+                navController = navController,
+                searchQuery = searchQuery,
+                searchState = searchState,
+                expandedResult = expandedResult.value,
+                keyboardController = keyboardController,
+                onExpandedChange = { expandedResult.value = it && searchQuery.isNotBlank() },
+                onSearchQueryChange = viewModel::onSearchQueryChange,
+            )
         } else {
-            LazyColumn(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.spacedBy(20.dp),
-                modifier = Modifier
-                    .fillMaxSize()
-            ) {
-                item {
-                    Spacer(
-                        modifier = Modifier
-                            .fillParentMaxHeight(
-                                if (screenSize == ScreenSize.Compact) 0.17f
-                                else 0.1f
-                            )
-                    )
-                    SearchContent(
-                        viewModel = viewModel,
-                        searchQuery = searchQuery,
-                        searchState = searchState,
-                        expandedResult = expandedResult,
-                        onExpandedChange = { expandedResult = it },
-                        keyboardController = keyboardController
-                    )
-                }
+            Content(
+                state = state,
+                navController = navController,
+                searchQuery = searchQuery,
+                searchState = searchState,
+                expandedResult = expandedResult.value,
+                keyboardController = keyboardController,
+                viewModel = viewModel,
+                screenSize = size,
+                onExpandedChange = { expandedResult.value = it }
+            )
+        }
+    }
+}
 
-                item {
-                    AnimatedVisibility(
-                        expandedResult,
-                        modifier = Modifier
-                            .sizeIn(
-                                minWidth = 360.dp,
-                                maxWidth = 720.dp,
-                            )
-                    ) {
-                        ResultContent(
-                            state = state,
-                            onClick = { id ->
-                                id?.let {
-                                    keyboardController?.hide()
-                                    navController.navigate(Screens.WeatherInformation(it))
-                                }
-                            }
-                        )
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun Content(
+    state: SearchState,
+    navController: NavController,
+    searchQuery: String,
+    searchState: SearchBarState,
+    expandedResult: Boolean,
+    keyboardController: SoftwareKeyboardController?,
+    viewModel: SearchViewModel,
+    screenSize: ScreenSize,
+    onExpandedChange: (Boolean) -> Unit
+) {
+    LazyColumn(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.spacedBy(20.dp),
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        item {
+            Spacer(
+                modifier = Modifier
+                    .fillParentMaxHeight(
+                        if (screenSize == ScreenSize.Compact) 0.17f
+                        else 0.1f
+                    )
+            )
+            SearchContent(
+                searchQuery = searchQuery,
+                searchState = searchState,
+                expandedResult = expandedResult,
+                onExpandedChange = onExpandedChange,
+                keyboardController = keyboardController,
+                onSearchQueryChange = viewModel::onSearchQueryChange
+            )
+        }
+
+        item {
+            AnimatedVisibility(
+                expandedResult,
+                modifier = Modifier
+                    .sizeIn(
+                        minWidth = 360.dp,
+                        maxWidth = 720.dp,
+                    )
+            ) {
+                ResultContent(
+                    state = state,
+                    onClick = { id ->
+                        id?.let {
+                            keyboardController?.hide()
+                            navController.navigate(Screens.WeatherInformation(it))
+                        }
                     }
-                }
+                )
+            }
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun ContentCompactLandscape(
+    state: SearchState,
+    navController: NavController,
+    searchQuery: String,
+    searchState: SearchBarState,
+    expandedResult: Boolean,
+    keyboardController: SoftwareKeyboardController?,
+    onExpandedChange: (Boolean) -> Unit,
+    onSearchQueryChange: (String) -> Unit
+) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center,
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        SearchContent(
+            searchQuery = searchQuery,
+            searchState = searchState,
+            expandedResult = expandedResult,
+            onExpandedChange = onExpandedChange,
+            keyboardController = keyboardController,
+            onSearchQueryChange = onSearchQueryChange,
+            enableScroll = true
+        )
+        AnimatedVisibility(expandedResult || searchQuery.isNotBlank()) {
+            Row {
+                Spacer(modifier = Modifier.width(20.dp))
+                ResultContent(
+                    state = state,
+                    enableScroll = true,
+                    onClick = { id ->
+                        id?.let {
+                            keyboardController?.hide()
+                            navController.navigate(Screens.WeatherInformation(it))
+                        }
+                    }
+                )
             }
         }
     }
@@ -155,12 +205,12 @@ fun SearchScreen(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun SearchContent(
-    viewModel: SearchViewModel,
     keyboardController: SoftwareKeyboardController?,
     searchQuery: String,
     searchState: SearchBarState,
     expandedResult: Boolean,
     onExpandedChange: (Boolean) -> Unit,
+    onSearchQueryChange: (String) -> Unit,
     enableScroll: Boolean = false
 ) {
     val composition by rememberLottieComposition(
@@ -186,18 +236,22 @@ private fun SearchContent(
             inputField = {
                 SearchBarDefaults.InputField(
                     query = searchQuery,
-                    onQueryChange = viewModel::onSearchQueryChange,
+                    onQueryChange = onSearchQueryChange,
                     onSearch = {
-                        viewModel.onSearchQueryChange(it)
+                        onSearchQueryChange(it)
                         keyboardController?.hide()
                     },
                     expanded = expandedResult,
                     onExpandedChange = onExpandedChange,
                     placeholder = {
                         Text(text = stringResource(R.string.search_place_holder))
-                    }
+                    },
+                    modifier = Modifier
+                        .testTag("search_bar_input")
                 )
-            }
+            },
+            modifier = Modifier
+                .testTag("search_bar")
         )
     }
 }

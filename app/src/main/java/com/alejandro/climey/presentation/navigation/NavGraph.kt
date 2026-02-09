@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -12,8 +13,10 @@ import com.alejandro.climey.presentation.search.SearchScreen
 import com.alejandro.climey.presentation.weatherInfo.WeatherInfoScreen
 
 @Composable
-fun MainNavGraph(innerPadding: PaddingValues) {
-    val navController = rememberNavController()
+fun MainNavGraph(
+    innerPadding: PaddingValues,
+    navController: NavHostController = rememberNavController()
+) {
 
     NavHost(
         navController = navController,
@@ -28,7 +31,7 @@ fun MainNavGraph(innerPadding: PaddingValues) {
         composable<Screens.WeatherInformation> {
             val id = it.toRoute<Screens.WeatherInformation>().locationId
 
-            WeatherInfoScreen(id,navController)
+            WeatherInfoScreen(id, navController)
         }
     }
 }

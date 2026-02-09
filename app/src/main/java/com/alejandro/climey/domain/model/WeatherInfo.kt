@@ -33,7 +33,7 @@ data class Forecast(
 data class ForecastDay(
     val date: LocalDate,
     val day: DayInfo,
-    val hour: List<HourInfo>
+    val hours: List<HourInfo>
 )
 
 data class DayInfo(
