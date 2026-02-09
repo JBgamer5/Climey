@@ -1,15 +1,22 @@
+# Android Studio and IntelliJ IDEA projects
+.idea/
 *.iml
-.gradle
-/local.properties
-/.idea/caches
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-/.idea/navEditor.xml
-/.idea/assetWizardSettings.xml
-.DS_Store
-/build
-/captures
-.externalNativeBuild
-.cxx
+*.iws
+
+# Build and temporary files
+.gradle/
+build/
 local.properties
+
+# Android specific build artifacts
+captures/
+.externalNativeBuild/
+.cxx/
+output.json
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Logs and temporary files
+*.log
