@@ -45,7 +45,7 @@ Follow these detailed instructions to build and run the project locally. No exte
 ### Installation Steps
 
 **1. Install Android Studio**
-Download and install the latest stable version of **Android Studio** (Koala or newer is recommended) from the [official developer site](https://developer.android.com/studio).
+Download and install the latest stable version of **Android Studio** (Otter 3 | 2025.2.3 or newer is necessary) from the [official developer site](https://developer.android.com/studio).
 * During installation, ensure the **Android SDK** and **Android Virtual Device (AVD)** components are selected.
 
 **2. Clone the Repository**
