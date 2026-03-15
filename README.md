@@ -1,4 +1,5 @@
 # 🌦️ Climey
+[ ![Download APK](https://img.shields.io/badge/Download-APK-green?style=for-the-badge&logo=android) ](https://github.com/JBgamer5/Climey/releases)
 
 **Climey** is a native Android weather application engineered to deliver a minimalist, fluid, and highly adaptive user experience. Built with modern Android development standards, it leverages **Material Design 3** to provide a consistent and aesthetically pleasing interface across a wide range of devices, from standard smartphones to foldables and tablets.
 
@@ -44,7 +45,7 @@ Follow these detailed instructions to build and run the project locally. No exte
 ### Installation Steps
 
 **1. Install Android Studio**
-Download and install the latest stable version of **Android Studio** (Koala or newer is recommended) from the [official developer site](https://developer.android.com/studio).
+Download and install the latest stable version of **Android Studio** (Otter 3 | 2025.2.3 or newer is necessary) from the [official developer site](https://developer.android.com/studio).
 * During installation, ensure the **Android SDK** and **Android Virtual Device (AVD)** components are selected.
 
 **2. Clone the Repository**
